@@ -8,8 +8,13 @@ var logger = require('morgan');
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
 var travelRouter = require('./app_server/routes/travel');
+var apiRouter = require('./app_api/routes/index'); // Created variable for API routes
+
 // Defined handlebars variable
 var handlebars = require('hbs');
+
+// Connect to database
+require('./app_api/models/db');
 
 var app = express();
 
@@ -27,10 +32,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Wire-up routes to controllers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 // Added new travel router
 app.use('/travel', travelRouter);
+// Wired up API routes
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
