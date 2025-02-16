@@ -8,14 +8,14 @@ const readLine = require('readline');
 const connect = () => {
     setTimeout(() => mongoose.connect(dbURI, {      
     }), 1000);
-}
+};
 
 // Monitor connection events
 mongoose.connection.on('connected', () => {
     console.log(`Mongoose connected to ${dbURI}`); 
 });
 
-mongoose.connection.on('error', err => {
+mongoose.connection.on('error', (err) => {
     console.log('Mongoose connection error: ', err);
 });
 
@@ -45,20 +45,23 @@ const gracefulShutdown = (msg) => {
 
 // Shutdown invoked by nodemon signal
 process.once('SIGUSR2', () => {
-    gracefulShutdown('nodemon restart');
-    process.kill(process.pid, 'SIGUSR2');
+    gracefulShutdown('nodemon restart', () => {
+        process.kill(process.pid, 'SIGUSR2');
+    });
 });
 
 // Shutdown invoked by app termination
 process.on('SIGINT', () => {
-    gracefulShutdown('app termination');
-    process.exit(0);
+    gracefulShutdown('app termination', () => {
+        process.exit(0);
+    });
 });
 
 // Shutdown invoked by container termination
 process.on('SIGTERM', () => {
-    gracefulShutdown('app shutdown');
-    process.exit(0);
+    gracefulShutdown('app shutdown', () => {
+        process.exit(0);
+    });
 });
 
 // Make initial connection to DB

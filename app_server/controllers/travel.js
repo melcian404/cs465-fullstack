@@ -2,9 +2,9 @@ const tripsEndpoint = 'http://localhost:3000/api/trips';
 const options = {
     method: 'GET',
     headers: {
-        'Accept': 'application/json'
-    }
-}
+        Accept: 'application/json'
+    },
+};
 
 //var fs = require('fs');
 // Read trips data from JSON file
@@ -14,8 +14,8 @@ const options = {
 const travel = async function(req, res, next){
     // console.log('TRAVEL CONTROLLER BEGIN');
     await fetch(tripsEndpoint, options)
-        .then(res => res.json())
-        .then(json => {
+        .then((res) => res.json())
+        .then((json) => {
             // console.log(json);
             let message = null;
             if(!(json instanceof Array)) {
@@ -28,10 +28,10 @@ const travel = async function(req, res, next){
             }
             res.render('travel', {title: 'Travlr Getaways', trips: json, message});
         })
-        .catch(err => res.status(500).send(e.message));
+        .catch((err) => res.status(500).send(err.message));
     // console.log('TRAVEL CONTROLLER AFTER RENDER');
 };
 
 module.exports = {
-    travel
+    travel,
 };
