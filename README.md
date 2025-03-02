@@ -2,7 +2,7 @@
 CS-465 Full Stack Development with MEAN
 
 **Project Overview**
-***
+*
 Project Overview
 <hr/>
 
