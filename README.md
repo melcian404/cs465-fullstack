@@ -2,8 +2,6 @@
 CS-465 Full Stack Development with MEAN
 
 **Project Overview**
-*
-Project Overview
 <hr/>
 
 This project is a RESTful full stack web application for Travlr Getaways, a travel booking website. They request a front-end website for customers to create an account, search for travel packages by location and price point, and book reservations with the travel agency. The website should allow customers to see their itineraries prior to travel. They also require an admin-only site to maintain a customer base, available trip packages, and pricing for each item and package.
